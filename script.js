@@ -133,3 +133,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --- Security & Protection Measures ---
+(function() {
+    // Disable Right Click Globally
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+
+    // Prevent Image Dragging
+    document.addEventListener('dragstart', (e) => {
+        if (e.target.nodeName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Disable Common Shortcuts (Ctrl+S, Ctrl+U, Ctrl+Shift+I, F12)
+    document.addEventListener('keydown', (e) => {
+        // Disable F12
+        if (e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Disable Ctrl+Shift+I (Inspect Element)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73)) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Disable Ctrl+Shift+J (Console)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j' || e.keyCode === 74)) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Disable Ctrl+U (View Source)
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Disable Ctrl+S (Save Page)
+        if (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Ctrl+C (Copy) - Optional but often requested with these
+        // if (e.ctrlKey && (e.key === 'C' || e.key === 'c' || e.keyCode === 67)) {
+        //     e.preventDefault();
+        //     return false;
+        // }
+    });
+})();
+
