@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Scroll Reveal Animations ---
-    const revealElements = document.querySelectorAll('.reveal');
+    const revealElements = document.querySelectorAll('.reveal, section');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => {
         revealObserver.observe(el);
     });
+
 
     // --- Hero Parallax & Glow Orbs ---
     const heroContent = document.querySelector('.hero-content');
@@ -43,7 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const factor = (index + 1) * 20;
             orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
         });
+
+        // Section Ambient Glow tracking
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const relX = ((e.clientX - rect.left) / rect.width) * 100;
+            const relY = ((e.clientY - rect.top) / rect.height) * 100;
+            section.style.setProperty('--mouse-x', `${relX}%`);
+            section.style.setProperty('--mouse-y', `${relY}%`);
+        });
     });
+
 
     // --- Registration Form Handling ---
     const registrationForm = document.getElementById('registration-form');

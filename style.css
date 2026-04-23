@@ -852,7 +852,19 @@ footer {
     color: var(--text-muted);
     font-size: 1.5rem;
     transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
 }
+
+.footer-social a span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 
 .footer-social a:hover {
     color: var(--primary-gold);
@@ -1033,6 +1045,76 @@ footer {
         transform: translateY(0);
     }
 }
+
+/* Minimal Color Animations */
+section {
+    position: relative;
+    overflow: hidden;
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(45, 11, 11, 0.15) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+section.active::after {
+    animation: entryPulse 2s ease-out forwards;
+}
+
+@keyframes entryPulse {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 0.4; transform: scale(1.1); }
+    100% { opacity: 0.15; transform: scale(1); }
+}
+
+section:hover::after {
+    opacity: 1;
+}
+
+
+@keyframes titleShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.ancient-title {
+    background: linear-gradient(90deg, var(--primary-gold) 0%, var(--bright-gold) 25%, #fff 50%, var(--bright-gold) 75%, var(--primary-gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleShimmer 8s linear infinite;
+}
+
+@keyframes ambientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bg-darker {
+    background-size: 200% 200%;
+    animation: ambientShift 15s ease infinite;
+}
+
+/* Add a subtle glow to section ornaments */
+.divider-ornament {
+    animation: ornamentGlow 4s infinite alternate;
+}
+
+@keyframes ornamentGlow {
+    0% { box-shadow: 0 0 10px var(--primary-gold); }
+    100% { box-shadow: 0 0 25px #FF4500, 0 0 40px var(--primary-gold); }
+}
+
 
 /* --- Mobile Responsiveness --- */
 /* --- Tablet & Mobile Responsiveness --- */
